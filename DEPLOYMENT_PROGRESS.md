@@ -16,8 +16,8 @@ This document tracks the deployment progress of the RailBook project to the clou
 ✅ COMPLETED: MongoDB Atlas Configuration
 ✅ COMPLETED: Environment Variables Configuration
 ✅ COMPLETED: Render Backend Deployment
-🟡 IN PROGRESS: Vercel Frontend Deployment
-⬜ PENDING: CORS Configuration Update
+✅ COMPLETED: Vercel Frontend Deployment
+🟡 IN PROGRESS: CORS Configuration Update
 ⬜ PENDING: Production Database Seeding
 ⬜ PENDING: End-to-End Testing
 ```
