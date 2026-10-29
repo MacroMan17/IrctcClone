@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-board: #0f4c81;
+  --color-board-dark: #0a3560;
+  --color-lamp: #f2a900;
+  --color-lamp-dark: #d49300;
+  --color-ink: #1c2128;
+  --color-muted: #5b6572;
+  --color-line: #d5dbe3;
+  --color-platform: #f3f5f8;
+  --color-tint: #e8f0f8;
+  --color-go: #1b7f4b;
+  --color-go-tint: #e5f4ec;
+  --color-stop: #b3261e;
+  --color-stop-tint: #fbeae8;
+  --color-wait: #8a5a00;
+  --color-wait-tint: #fff3d6;
+}
+
+html { scroll-padding-top: 5rem; }
+body { @apply bg-platform text-ink font-sans antialiased; font-variant-numeric: tabular-nums; }
+h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: 0.005em; }
+
+:focus-visible { outline: 3px solid var(--color-lamp); outline-offset: 2px; border-radius: 4px; }
+
+/* Ticket perforation used on the confirmation page */
+.perforation { background-image: radial-gradient(circle at 50% 50%, var(--color-platform) 5px, transparent 5.5px); background-size: 16px 12px; background-repeat: repeat-x; height: 12px; }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
