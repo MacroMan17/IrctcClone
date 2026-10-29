@@ -1,7 +1,7 @@
 # 🚀 RailBook Deployment Progress Document
 
 **Last Updated:** October 27, 2026
-**Status:** IN PROGRESS - Frontend Redeploying with VITE_API_URL on Vercel
+**Status:** IN PROGRESS - Updating CORS in Render Backend
 **Project:** IrctcClone - IRCTC-inspired Railway Reservation System
 
 ---
@@ -16,10 +16,10 @@ This document tracks the deployment progress of the RailBook project to the clou
 ✅ COMPLETED: MongoDB Atlas Configuration
 ✅ COMPLETED: Environment Variables Configuration
 ✅ COMPLETED: Render Backend Deployment
-✅ COMPLETED: Vercel Frontend Initial Deployment
+✅ COMPLETED: Vercel Frontend Deployment
 ✅ COMPLETED: Added VITE_API_URL Environment Variable to Vercel
-🟡 IN PROGRESS: Frontend Redeploying on Vercel (waiting for "Ready" status)
-⬜ PENDING: CORS Configuration Update in Render
+✅ COMPLETED: Frontend is Live and Accessible
+🟡 IN PROGRESS: CORS Configuration Update in Render
 ⬜ PENDING: Production Database Seeding
 ⬜ PENDING: End-to-End Testing
 ```
@@ -161,30 +161,41 @@ https://irctclone.onrender.com
 
 ### Frontend URL (SAVE THIS!)
 ```
-https://ircte-clone-tau.vercel.app
+https://irctc-clone-tau.vercel.app
 ```
 
-**Status:** REDEPLOYING with environment variable (waiting for "Ready" status)
+**Status:** ✅ LIVE AND ACCESSIBLE
+- Initial deployment: ✅ Complete
+- Environment variable: ✅ VITE_API_URL set
+- Frontend redeployment: ✅ Complete
+- Current Issue: Backend CORS not updated yet (frontend shows "Cannot reach server" error)
+- Next Step: Update CORS_ORIGIN in Render to allow frontend requests
 
 ---
 
 ## 🟡 IN PROGRESS STEPS
 
-### Step 5: Frontend Redeploying on Vercel (CURRENT)
-**Status:** Redeploying with VITE_API_URL environment variable
+### Step 5: CORS Configuration Update in Render (CURRENT)
+**Status:** Updating backend CORS to accept frontend requests
 
 **What to do:**
-1. Go to Vercel dashboard: https://vercel.com/ircte-clone
-2. Monitor the deployment status
-3. Wait for status to show **"Ready"** (green checkmark)
-4. This should complete within 1-2 minutes
+1. Go to Render dashboard: https://dashboard.render.com
+2. Click on your **irctc-clone-backend** service
+3. Go to **Environment** tab
+4. Find `CORS_ORIGIN` variable (currently `*`)
+5. Click edit (pencil icon)
+6. Change value to: `https://irctc-clone-tau.vercel.app`
+7. Click **Save**
+8. Backend will auto-redeploy (1-2 minutes)
+
+**Why:** Frontend needs permission from backend to make API requests
 
 **Current Progress:**
-- ✅ Frontend deployed to Vercel (initial deployment done)
-- ✅ VITE_API_URL environment variable added
-- ⏳ Waiting for redeploy with env var to complete
+- ✅ Frontend deployed and accessible
+- ⏳ Waiting for CORS update in Render
+- ⏳ Backend will redeploy after CORS change
 
-**Next:** Once status shows "Ready", proceed to Step 6
+**Next:** Once backend redeploys, frontend will connect to backend successfully
 
 ---
 
