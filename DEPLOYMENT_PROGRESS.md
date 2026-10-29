@@ -1,7 +1,7 @@
 # 🚀 RailBook Deployment Progress Document
 
 **Last Updated:** October 27, 2026
-**Status:** IN PROGRESS - Backend Deployment (Render)
+**Status:** IN PROGRESS - Frontend Redeploying with VITE_API_URL on Vercel
 **Project:** IrctcClone - IRCTC-inspired Railway Reservation System
 
 ---
@@ -16,8 +16,10 @@ This document tracks the deployment progress of the RailBook project to the clou
 ✅ COMPLETED: MongoDB Atlas Configuration
 ✅ COMPLETED: Environment Variables Configuration
 ✅ COMPLETED: Render Backend Deployment
-✅ COMPLETED: Vercel Frontend Deployment
-🟡 IN PROGRESS: CORS Configuration Update
+✅ COMPLETED: Vercel Frontend Initial Deployment
+✅ COMPLETED: Added VITE_API_URL Environment Variable to Vercel
+🟡 IN PROGRESS: Frontend Redeploying on Vercel (waiting for "Ready" status)
+⬜ PENDING: CORS Configuration Update in Render
 ⬜ PENDING: Production Database Seeding
 ⬜ PENDING: End-to-End Testing
 ```
@@ -132,70 +134,91 @@ https://irctclone.onrender.com
 
 ---
 
+## ✅ COMPLETED: Frontend Deployment (Vercel)
+
+### Vercel Account Setup
+- ✅ Created Vercel account (via GitHub)
+- ✅ Connected GitHub account to Vercel
+- ✅ Authorized Vercel to access IrctcClone repository
+
+### Vercel Project Configuration
+- ✅ Selected "Import single project" option
+- ✅ Connected IrctcClone repository
+- ✅ Selected main branch
+- ✅ Set Framework: Vite
+- ✅ Set Root Directory: `frontend/`
+- ✅ Set Build Command: `npm run build`
+- ✅ Set Output Directory: `dist`
+- ✅ Initial deployment completed in 5 seconds
+
+### Environment Variable Configuration
+- ✅ Added VITE_API_URL environment variable
+  - Key: `VITE_API_URL`
+  - Value: `https://irctclone.onrender.com`
+  - Type: Config (not Secret - VITE_ variables are public)
+  - Environment: Production
+- ✅ Triggered redeploy with environment variable
+
+### Frontend URL (SAVE THIS!)
+```
+https://ircte-clone-tau.vercel.app
+```
+
+**Status:** REDEPLOYING with environment variable (waiting for "Ready" status)
+
+---
+
+## 🟡 IN PROGRESS STEPS
+
+### Step 5: Frontend Redeploying on Vercel (CURRENT)
+**Status:** Redeploying with VITE_API_URL environment variable
+
+**What to do:**
+1. Go to Vercel dashboard: https://vercel.com/ircte-clone
+2. Monitor the deployment status
+3. Wait for status to show **"Ready"** (green checkmark)
+4. This should complete within 1-2 minutes
+
+**Current Progress:**
+- ✅ Frontend deployed to Vercel (initial deployment done)
+- ✅ VITE_API_URL environment variable added
+- ⏳ Waiting for redeploy with env var to complete
+
+**Next:** Once status shows "Ready", proceed to Step 6
+
+---
+
 ## ⬜ PENDING STEPS
 
-### Step 4: Deploy Backend to Render
-**What to do:**
-1. Click "Deploy web service" button on Render dashboard
-2. Wait for build and deployment (2-3 minutes)
-3. Monitor build logs for:
-   - "npm install" completing
-   - "npm start" running
-   - "API listening on :5000" message
-4. Get the backend URL (format: https://irctc-clone-backend.onrender.com)
-5. Save the backend URL for next steps
-
-**Expected Result:** Backend service live and running
-
----
-
-### Step 5: Deploy Frontend to Vercel
-**Prerequisites:** Backend URL from Render
+### Step 6: Update CORS Configuration in Render
+**Prerequisites:** Frontend deployment shows "Ready" status on Vercel
 
 **What to do:**
-1. Go to https://vercel.com
-2. Sign in with GitHub
-3. Click "Add New" → "Project"
-4. Select IrctcClone repository
-5. Configure:
-   - Framework: Vite
-   - Root Directory: frontend
-   - Build Command: npm run build
-   - Output Directory: dist
-6. Add Environment Variable:
-   - VITE_API_URL = https://irctc-clone-backend.onrender.com (actual URL)
-7. Click "Deploy"
-8. Wait for deployment (1-2 minutes)
-9. Get frontend URL (format: https://irctc-clone.vercel.app)
-
-**Expected Result:** Frontend service live and accessible
-
----
-
-### Step 6: Update CORS Configuration
-**Prerequisites:** Frontend URL from Vercel
-
-**What to do:**
-1. Go to Render dashboard
-2. Click on backend service
+1. Go to Render dashboard: https://dashboard.render.com
+2. Click on backend service (irctc-clone-backend or similar)
 3. Go to "Environment" tab
-4. Update CORS_ORIGIN from `*` to your frontend URL
-5. Save changes
-6. Service will auto-redeploy
+4. Find the `CORS_ORIGIN` variable (currently set to `*`)
+5. Update value from `*` to: `https://ircte-clone-tau.vercel.app`
+6. Click "Save" button
+7. Backend will auto-redeploy (1-2 minutes)
 
-**Expected Result:** Backend and Frontend can communicate securely
+**Why:** This allows the frontend to communicate with the backend securely
+
+**Expected Result:** Backend service redeploys with updated CORS settings
 
 ---
 
 ### Step 7: Database Seeding (Production)
-**Prerequisites:** Both services deployed and running
+**Prerequisites:** Both services deployed and running with CORS configured
 
 **What to do:**
-1. SSH into Render backend (or use Render shell)
-2. Run seed command: `npm run seed`
-3. Verify: 18 stations, 11 trains, 398 inventory docs created
+1. Go to Render dashboard
+2. Click on backend service
+3. Go to "Shell" tab
+4. Run command: `npm run seed`
+5. Wait for completion message
 
-**Alternative:** Seed via API endpoint if available
+**Alternative:** If seed command not available in npm scripts, contact team
 
 **Expected Result:** Production database populated with trains and stations
 
@@ -205,7 +228,7 @@ https://irctclone.onrender.com
 **Prerequisites:** All services deployed and seeded
 
 **Test Cases:**
-1. Frontend loads at https://irctc-clone.vercel.app
+1. Frontend loads at https://ircte-clone-tau.vercel.app
 2. Can view station list
 3. Can search for trains (e.g., NDLS to BCT)
 4. Can login with credentials
@@ -298,9 +321,10 @@ Root Directory: frontend/
 | Oct 27, 2026 | GitHub Setup | ✅ Complete |
 | Oct 27, 2026 | MongoDB Setup | ✅ Complete |
 | Oct 27, 2026 | Env Variables | ✅ Complete |
-| Oct 27, 2026 | Render Config | ✅ Complete |
-| (Next) | Backend Deploy | 🟡 In Progress |
-| (Next) | Frontend Deploy | ⬜ Pending |
+| Oct 27, 2026 | Render Backend Deploy | ✅ Complete |
+| Oct 27, 2026 | Vercel Frontend Deploy | ✅ Complete |
+| Oct 27, 2026 | Vercel Env Var Added | ✅ Complete |
+| Oct 27, 2026 | Frontend Redeploying | 🟡 In Progress |
 | (Next) | CORS Update | ⬜ Pending |
 | (Next) | DB Seeding | ⬜ Pending |
 | (Next) | Testing | ⬜ Pending |
